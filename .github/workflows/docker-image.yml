@@ -1,4 +1,4 @@
-name: CI with SonarQube
+name: Build
 
 on:
   push:
@@ -6,23 +6,23 @@ on:
       - devops
 
 jobs:
-  sonar:
-    name: Run SonarQube Analysis
+  build:
+    name: Build
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: SonarQube Scan
+      - name: Run SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -31,3 +31,10 @@ jobs:
           args: >
             -Dsonar.projectKey=zomato-clone
             -Dsonar.sources=.
+
+      # Optional: Fail job if Quality Gate fails
+      # - name: Check Quality Gate
+      #   uses: sonarsource/sonarqube-quality-gate-action@master
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
