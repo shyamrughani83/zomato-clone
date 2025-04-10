@@ -54,8 +54,7 @@ const questions = [
       "Paradise Biryani • ",
       "Pizza Hut • ",
       "Sagar RatnaWOW! • ",
-      "Momo • ",
-    ],
+          ],
   },
 ];
 
