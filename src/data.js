@@ -50,7 +50,6 @@ const questions = [
     id: 3,
     title: "Top Restaurant Chains",
     infos: [
-      "KFC • ",
       "Paradise Biryani • ",
       "Pizza Hut • ",
       "Sagar RatnaWOW! • ",
